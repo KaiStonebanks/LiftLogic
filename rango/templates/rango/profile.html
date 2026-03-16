@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - LiftLogic</title>
+    <link rel="stylesheet" href="{% static 'rango/css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>👤 Your Profile</h1>
+            <div class="header-buttons">
+                <a href="{% url 'home' %}" class="btn btn-secondary">← Back to Home</a>
+                <a href="{% url 'logout' %}" class="btn btn-logout">Logout</a>
+            </div>
+        </div>
+
+        <div style="max-width: 600px; margin: 0 auto;">
+            <div style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); padding: 40px; border-radius: 20px;">
+                <h2 style="color: #ffd700; margin-bottom: 30px;">{{ user.username }}</h2>
+                
+                <div style="text-align: left;">
+                    <div style="margin-bottom: 20px; padding: 15px; background: rgba(255, 255, 255, 0.05); border-radius: 10px;">
+                        <p style="font-size: 1.1rem;"><strong>Email:</strong> {{ user.email }}</p>
+                    </div>
+                    
+                    <h3 style="color: #ffd700; margin: 30px 0 20px;">Your One Rep Maxes</h3>
+                    
+                    <div style="margin-bottom: 15px; padding: 15px; background: rgba(255, 255, 255, 0.05); border-radius: 10px;">
+                        <p style="font-size: 1.1rem;">🏋️ <strong>Bench Press:</strong> {{ bench_max }} kg</p>
+                    </div>
+                    
+                    <div style="margin-bottom: 15px; padding: 15px; background: rgba(255, 255, 255, 0.05); border-radius: 10px;">
+                        <p style="font-size: 1.1rem;">🦵 <strong>Squat:</strong> {{ squat_max }} kg</p>
+                    </div>
+                    
+                    <div style="margin-bottom: 15px; padding: 15px; background: rgba(255, 255, 255, 0.05); border-radius: 10px;">
+                        <p style="font-size: 1.1rem;">💀 <strong>Deadlift:</strong> {{ deadlift_max }} kg</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

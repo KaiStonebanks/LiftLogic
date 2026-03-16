@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - LiftLogic</title>
+    <link rel="stylesheet" href="{% static 'rango/css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>💪 LiftLogic Trainer</h1>
+            <div class="header-buttons">
+                <a href="{% url 'profile' %}" class="btn btn-secondary">👤 Profile</a>
+                <a href="{% url 'logout' %}" class="btn btn-logout">Logout</a>
+            </div>
+        </div>
+
+        <h2 style="font-size: 2rem; margin-bottom: 20px;">Welcome, {{ user.username }}! 🎯</h2>
+        
+        <div class="stats-bar">
+            <div class="stat-item">🏋️ Bench: <strong>{{ bench_max }} kg</strong></div>
+            <div class="stat-item">🦵 Squat: <strong>{{ squat_max }} kg</strong></div>
+            <div class="stat-item">💀 Deadlift: <strong>{{ deadlift_max }} kg</strong></div>
+        </div>
+
+        <h2 style="font-size: 1.8rem; margin: 40px 0 20px;">Choose Your Training Program</h2>
+
+        <div class="exercise-grid">
+            <div class="exercise-card">
+                <h3>🏋️ Bench Press</h3>
+                <p>Your Max: {{ bench_max }} kg</p>
+                <a href="{% url 'bench_press' %}" class="btn btn-primary">Start Program</a>
+            </div>
+
+            <div class="exercise-card">
+                <h3>🦵 Squat</h3>
+                <p>Your Max: {{ squat_max }} kg</p>
+                <a href="{% url 'squat' %}" class="btn btn-primary">Start Program</a>
+            </div>
+
+            <div class="exercise-card">
+                <h3>💀 Deadlift</h3>
+                <p>Your Max: {{ deadlift_max }} kg</p>
+                <a href="{% url 'deadlift' %}" class="btn btn-primary">Start Program</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

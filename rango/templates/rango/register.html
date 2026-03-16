@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - LiftLogic</title>
+    <link rel="stylesheet" href="{% static 'rango/css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h1>💪 LiftLogic Trainer</h1>
+            <h2 style="color: #ffd700; margin-bottom: 30px;">Register</h2>
+            <form method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="form-group">
+                        <label>{{ field.label }}</label>
+                        {{ field }}
+                        {% if field.errors %}
+                            <ul class="errorlist">
+                                {% for error in field.errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 20px;">Register</button>
+            </form>
+            <div class="form-link">
+                Already have an account? <a href="{% url 'login' %}">Login here</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

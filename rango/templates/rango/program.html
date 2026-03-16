@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ exercise_name }} Program - LiftLogic</title>
+    <link rel="stylesheet" href="{% static 'rango/css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>{{ exercise_name }} Program</h1>
+            <div class="header-buttons">
+                <a href="{% url 'home' %}" class="btn btn-secondary">← Back to Home</a>
+                <a href="{% url 'logout' %}" class="btn btn-logout">Logout</a>
+            </div>
+        </div>
+
+        <div class="program-container">
+            <div style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); padding: 20px; border-radius: 15px; margin-bottom: 30px;">
+                <h2 style="color: #ffd700;">Smolov Jr. 4-Week Cycle</h2>
+                <p style="font-size: 1.3rem; margin-top: 10px;">Your One Rep Max: <strong>{{ one_rep_max }} kg</strong></p>
+            </div>
+
+            {% for week_name, workouts in program.items %}
+            <div class="week-section">
+                <h2>Week {{ forloop.counter }}</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Day</th>
+                            <th>Sets</th>
+                            <th>Reps</th>
+                            <th>Percentage</th>
+                            <th>Weight (kg)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for workout in workouts %}
+                        <tr>
+                            <td><strong>{{ workout.day }}</strong></td>
+                            <td>{{ workout.sets }}</td>
+                            <td>{{ workout.reps }}</td>
+                            <td>{{ workout.percentage }}%</td>
+                            <td><strong>{{ workout.weight }} kg</strong></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
