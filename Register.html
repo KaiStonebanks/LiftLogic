@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register</title>
+
+<style>
+
+*{
+    box-sizing: border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family: Arial, sans-serif;
+    background:url("Media.jpg") no-repeat center center/cover;
+    position:relative;
+}
+
+/* Overlay fix */
+body::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:rgba(200,210,230,0.6);
+    z-index:0;
+}
+
+.card{
+    position:relative;
+    z-index:1;
+    background:#ffffff;
+    padding:35px;
+    width:340px;
+    border-radius:10px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+.card h1{
+    font-size:22px;
+    margin-bottom:5px;
+}
+
+.card p{
+    font-size:13px;
+    color:#777;
+    margin-bottom:20px;
+}
+
+label{
+    font-size:12px;
+    font-weight:bold;
+    display:block;
+    margin-bottom:5px;
+}
+
+input{
+    width:100%;
+    padding:10px;
+    margin-bottom:15px;
+    border:1px solid #ddd;
+    background:#f9f9f9;
+    border-radius:5px;
+    font-size:13px;
+    transition:0.2s;
+}
+
+/* Better UX */
+input:focus{
+    outline:none;
+    border-color:#0f0f2d;
+    background:#fff;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    border:none;
+    background:#0f0f2d;
+    color:white;
+    border-radius:5px;
+    font-size:14px;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+button:hover{
+    background:#1f1f55;
+}
+
+.footer{
+    text-align:center;
+    margin-top:15px;
+    font-size:12px;
+}
+
+.footer a{
+    text-decoration:none;
+    color:#0f0f2d;
+    font-weight:bold;
+}
+
+.field-error { display: none; font-size: 11px; color: #d0382b; margin-top: -10px; margin-bottom: 10px; }
+.field-error.visible { display: block; }
+input.error { border: 1.5px solid #d0382b; background: #fff5f5; }
+input.valid { border: 1.5px solid #aed6a7; }
+
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<h1>Welcome to Greatness</h1>
+<p>Register to get started</p>
+
+<form id="registerForm">
+
+<label for="name">Your Name</label>
+<input id="name" type="text" placeholder="Enter your name" required>
+<span class="field-error" id="nameErr"></span>
+
+<label for="email">Email</label>
+<input id="email" type="email" placeholder="Enter your email" required>
+<span class="field-error" id="emailErr"></span>
+
+<label for="password">Password</label>
+<input id="password" type="password" placeholder="Enter your password" required minlength="6">
+<span class="field-error" id="passwordErr"></span>
+
+<label for="confirm">Confirm Password</label>
+<input id="confirm" type="password" placeholder="Confirm your password" required>
+<span class="field-error" id="confirmErr"></span>
+
+<header style="margin:20px 0; font-size:16px; font-weight:bold; color:#333;">Enter Your Max Lifts (KG)</header>
+
+<label for="bench">Bench Press (kg)</label>
+<input id="bench" type="number" min="0" placeholder="Enter your max">
+<span class="field-error" id="benchErr"></span>
+
+<label for="squat">Squat (kg)</label>
+<input id="squat" type="number" min="0" placeholder="Enter your max">
+<span class="field-error" id="squatErr"></span>
+
+<label for="deadlift">Deadlift (kg)</label>
+<input id="deadlift" type="number" min="0" placeholder="Enter your max">
+<span class="field-error" id="deadliftErr"></span>
+
+<button type="submit">Register</button>
+
+</form>
+
+<p class="footer">Already have an account? <a href="Login.html">Login</a></p>
+
+</div>
+
+<script> 
+
+//Validation
+    const form = document.getElementById('registerForm');
+
+    function showError(inputId, errId, msg) {
+        const input = document.getElementById(inputId);
+        const err   = document.getElementById(errId);
+        input.classList.add('error');
+        input.classList.remove('valid');
+        err.textContent = msg;
+        err.style.display = 'block';
+    }
+
+    function clearError(inputId, errId) {
+        const input = document.getElementById(inputId);
+        const err   = document.getElementById(errId);
+        input.classList.remove('error');
+        input.classList.add('valid');
+        err.style.display = 'none';
+    }
+
+    // Shows errors as you leave each field
+    document.getElementById('name').addEventListener('blur', function() {
+        if (!this.value.trim()) 
+                showError('name', 'nameErr', 'Name is required');
+        else 
+            clearError('name', 'nameErr');
+    });
+
+    document.getElementById('email').addEventListener('blur', function() {
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!this.value.trim()) 
+            showError('email', 'emailErr', 'Email is required');
+        else if (!emailPattern.test(this.value.trim())) 
+            showError('email', 'emailErr', 'Enter a valid email address');
+        else 
+            clearError('email', 'emailErr');
+    });
+
+    document.getElementById('password').addEventListener('blur', function() {
+        const strongPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{6,}$/;
+
+        if (!this.value) 
+            showError('password', 'passwordErr', 'Password is required');
+        else if (!strongPattern.test(this.value)) 
+            showError('password', 'passwordErr', 'Must have uppercase, lowercase, number and special character');
+        else 
+            clearError('password', 'passwordErr');
+    });
+
+    document.getElementById('confirm').addEventListener('blur', function() {
+        const password = document.getElementById('password').value;
+
+        if (!this.value) 
+            showError('confirm', 'confirmErr', 'Please confirm your password');
+        else if (this.value !== password) 
+            showError('confirm', 'confirmErr', 'Passwords do not match');
+        else 
+            clearError('confirm', 'confirmErr');
+    });
+
+    ['bench', 'squat', 'deadlift'].forEach(function(id) {
+        document.getElementById(id).addEventListener('blur', function() {
+            
+            if (this.value === '') 
+                showError(id, id + 'Err', 'This field is required');
+            else if (Number(this.value) <= 0) 
+                showError(id, id + 'Err', 'Must be greater than zero');
+            else 
+                clearError(id, id + 'Err');
+        });
+    });
+
+    
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const name     = document.getElementById('name').value.trim();
+        const email    = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value;
+        const confirm  = document.getElementById('confirm').value;
+        const bench    = document.getElementById('bench').value;
+        const squat    = document.getElementById('squat').value;
+        const deadlift = document.getElementById('deadlift').value;
+
+        const emailPattern  = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const strongPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{6,}$/;
+
+        let valid = true;
+    
+    
+    if (!name) { 
+        showError('name', 'nameErr', 'Name is required'); 
+        valid = false; 
+    } else 
+        clearError('name', 'nameErr');
+
+    if (!email) { 
+        showError('email', 'emailErr', 'Email is required'); 
+        valid = false; 
+    } else if (!emailPattern.test(email)) { 
+        showError('email', 'emailErr', 'Enter a valid email address'); 
+        valid = false; 
+    } else 
+        clearError('email', 'emailErr');
+
+    if (!password) { 
+        showError('password', 'passwordErr', 'Password is required'); 
+        valid = false; 
+    } else if (!strongPattern.test(password)) { 
+        showError('password', 'passwordErr', 'Must have uppercase, lowercase, number and special character'); 
+        valid = false; 
+    } else 
+        clearError('password', 'passwordErr');
+
+    if (!confirm) { 
+        showError('confirm', 'confirmErr', 'Please confirm your password'); 
+        valid = false; 
+    } else if (confirm !== password) { 
+        showError('confirm', 'confirmErr', 'Passwords do not match'); 
+        valid = false; 
+    } else
+        clearError('confirm', 'confirmErr');
+
+    if (bench === '') { 
+        showError('bench', 'benchErr', 'This field is required'); 
+        valid = false; 
+    } else if (Number(bench) <= 0) { 
+        showError('bench', 'benchErr', 'Must be greater than zero'); 
+        valid = false; 
+    } else 
+        clearError('bench', 'benchErr');
+
+    if (squat === '') { 
+        showError('squat', 'squatErr', 'This field is required'); 
+        valid = false; 
+    } else if (Number(squat) <= 0) { 
+        showError('squat', 'squatErr', 'Must be greater than zero');
+        valid = false; 
+    } else clearError('squat', 'squatErr');
+
+    if (deadlift === '') { 
+        showError('deadlift', 'deadliftErr', 'This field is required'); 
+        valid = false; 
+    } else if (Number(deadlift) <= 0) { 
+        showError('deadlift', 'deadliftErr', 'Must be greater than zero'); 
+        valid = false; 
+    } else 
+        clearError('deadlift', 'deadliftErr');
+
+    if (valid) {
+        alert('Registration successful!');
+    }
+    });
+</script>
+
+</body>
+</html>
