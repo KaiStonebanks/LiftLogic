@@ -1,46 +1,16 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About - LiftLogic</title>
-    <link rel="stylesheet" href="{% static 'rango/css/style.css' %}">
-</head>
-<body>
-    <div class="container">
-        
-        <div class = "header">
-            <h1> About LiftLogic</h1>
-            <div class="header-buttons">
-                <a href="{% url 'home' %}" class="btn btn-secondary"> HomePage</a>
-            </div>
-        </div>
-
-        <div style="max-width: 700px; margin: 0 auto;">
-            <div style="background: rgba(255, 255, 255, 0); backdrop-filter: blur(10px); padding: 40px; border-radius: 20px;">
-
-                <div style="text-align: left; line-height: 1.7; font-size: 1.05rem;">
-
-                    <p style="margin-bottom: 20px;">
-                        LiftLogic is a smart workout app designed with the purpose to assist you in progressing your lifting journey with confidence.
-                        LiftLogic creates a personalized strength program tailored to your current ability and personal best rep after entering your one rep max.
-                    </p>
-
-                    <p style="margin-bottom: 20px;">
-                        Based on your performance, your program is adapted in each week to maximize gain and recovery.
-                        when using LiftLogic, logging your previous lifts, tracking your progress, and providing feedback on the workout difficulty is possible 
-                        allowing LiftLogic to provide recommendations such as increasing your weight, manage recovery, or even try different strength programs.
-                    </p>
-                        
-                    <p style="margin-bottom: 20px;">
-                        Founded in 2026 by a team of five University of Glasgow students, LiftLogic was created with the aim to make structured strength training easily and readily accessable to all.
-                        The program is user friendly enabling beginners just starting out in the gym to experienced veterans lifters looking to go above and beyond to use the app with ease. 
-                    </p>
-
-                </div>
-            </div>
-        </div> 
-    </div>
-</body>
-<html>
+{% extends 'rango/base.html' %}
+{% block title %}About Us{% endblock %}
+{% block content %}
+<div class="card card-sm">
+    <h1 style="margin-bottom: 1.5rem;">About LiftLogic</h1>
+    <p style="line-height: 1.6; margin-bottom: 15px; color: var(--text-muted);">
+        LiftLogic is a smart workout app designed with the purpose to assist you in progressing your lifting journey with confidence. LiftLogic creates a personalized strength program tailored to your current ability and personal best rep.
+    </p>
+    <p style="line-height: 1.6; margin-bottom: 15px; color: var(--text-muted);">
+        Based on your performance, your program is adapted in each week to maximize gain and recovery. When using LiftLogic, logging your previous lifts and tracking your progress is possible.
+    </p>
+    <p style="line-height: 1.6; color: var(--text-muted);">
+        Founded in 2026 by a team of University of Glasgow students, LiftLogic was created to make structured strength training accessible to all.
+    </p>
+</div>
+{% endblock %}
