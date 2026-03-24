@@ -11,4 +11,7 @@ urlpatterns = [
     path('program/squat/', views.squat_program, name='squat'),
     path('program/deadlift/', views.deadlift_program, name='deadlift'),
     path('profile/', views.profile, name='profile'),
+    path('about_us/', views.about_us, name='about_us'),
+    path('contact_us/', views.contact_us, name='contact_us'),
+    path('faqs/', views.faqs, name='faqs'),
 ]

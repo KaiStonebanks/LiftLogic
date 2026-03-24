@@ -71,6 +71,25 @@ def profile(request):
     }
     return render(request, 'rango/profile.html', context)
 
+def about_us(request):
+    return render (request, 'rango/about_us.html')
+
+def contact_us(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        phone = request.POST.get('phone')
+        email = request.POST.get('email')
+        notes = request.POST.get('notes')
+        callback = request.POST.get('callback')
+
+        print(name, phone, email, notes, callback)
+
+    return render (request, 'rango/contact_us.html')
+
+def faqs(request):
+    return render (request, 'rango/FAQs.html')
+
+
 def generate_smolov_program(one_rep_max):
     weeks = {
         'week1': [
@@ -99,6 +118,7 @@ def generate_smolov_program(one_rep_max):
         ],
     }
     
+
     # Calculate weights for each workout
     for week_name, workouts in weeks.items():
         for workout in workouts:
