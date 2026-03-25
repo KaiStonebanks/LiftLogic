@@ -1,0 +1,68 @@
+{% extends 'rango/base.html' %}
+{% block title %}Workout: {{ exercise_slug|title }}{% endblock %}
+{% block content %}
+<div class="card">
+    <h1>{{ exercise_slug|title }} Program</h1>
+    <p>Your current 1RM is <strong>{{ one_rm }} kg</strong>.</p>
+    
+    {% if feedback_msg %}
+    <div class="alert">
+        {{ feedback_msg }}
+    </div>
+    {% endif %}
+
+    <h3>Smolov Jr. Cycle (3 Weeks)</h3>
+    <table class="table text-center" style="font-size: 0.95rem;">
+        <thead>
+            <tr>
+                <th>Week</th>
+                <th>Day 1 - 6 x 6</th>
+                <th>Day 2 - 7 x 5</th>
+                <th>Day 3 - 8 x 4</th>
+                <th>Day 4 - 10 x 3</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>1</strong></td>
+                {% for day in program %}
+                <td>{{ day.percentage }}%<br><strong>{{ day.week1 }} kg</strong></td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <td><strong>2</strong></td>
+                {% for day in program %}
+                <td>{{ day.percentage }}% + 2.5kg<br><strong>{{ day.week2 }} kg</strong></td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <td><strong>3</strong></td>
+                {% for day in program %}
+                <td>{{ day.percentage }}% + 5.0kg<br><strong>{{ day.week3 }} kg</strong></td>
+                {% endfor %}
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="card">
+    <h3>Log Your Lift</h3>
+    <form method="post" action="{% url 'workout' exercise_slug %}">
+        {% csrf_token %}
+        <div class="django-form form-group">
+            {{ form.as_p }}
+        </div>
+        
+        <div class="form-group">
+            <label for="feedback">How did the weight feel?</label>
+            <select name="feedback" id="feedback">
+                <option value="easy">Easy (Increase Weight)</option>
+                <option value="moderate" selected>Moderate (Maintain)</option>
+                <option value="difficult">Difficult (Decrease Weight)</option>
+            </select>
+        </div>
+        
+        <button type="submit" class="btn-submit">Log Session</button>
+    </form>
+</div>
+{% endblock %}
