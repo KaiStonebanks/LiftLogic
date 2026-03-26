@@ -1,0 +1,260 @@
+:root {
+    --primary: #0084d1;
+    --primary-hover: #0073bc;
+    --text-main: #222222;
+    --text-muted: #555555;
+    --bg-surface: #ffffff;
+    --border: #e0e0e0;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    color: var(--text-main);
+    background-image: url('../images/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 45, 75, 0.85); /* Strength Level deep marine blue */
+    z-index: -1;
+}
+
+.navbar {
+    background: rgba(0, 0, 0, 0.4);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: white;
+    text-decoration: None;
+    letter-spacing: -0.5px;
+}
+
+.nav-links a, .btn-link {
+    margin-left: 1.5rem;
+    text-decoration: None;
+    color: white;
+    font-weight: 600;
+    transition: color 0.2s;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
+}
+
+.nav-links a:hover, .btn-link:hover {
+    color: var(--primary);
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: white !important;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    transition: background 0.2s !important;
+}
+
+.btn-primary:hover {
+    background: var(--primary-hover) !important;
+}
+
+.main-content {
+    flex: 1 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+    max-width: 1100px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+/* Solid White Card */
+.card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2.5rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+}
+
+.card-sm {
+    max-width: 500px;
+    margin: 2rem auto;
+}
+
+h1, h2, h3 {
+    margin-top: 0;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text-muted);
+}
+
+.form-group input, .form-group select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #D1D5DB;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.form-group input:focus, .form-group select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+.btn-submit:hover {
+    background: var(--primary-hover);
+}
+
+.grid-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.program-card {
+    text-align: center;
+    transition: transform 0.2s;
+    cursor: pointer;
+}
+
+.program-card a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.program-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary);
+}
+
+.program-title {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 1rem;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    background: rgba(255,255,255,0.5);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.table th, .table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+}
+
+.table th {
+    font-weight: 600;
+    background: rgba(243, 244, 246, 0.8);
+}
+
+.text-center {
+    text-align: center;
+}
+
+.alert {
+    padding: 1rem;
+    border-radius: 4px;
+    margin-bottom: 1.5rem;
+    background: #DEF7EC;
+    color: #03543F;
+    border: 1px solid #84E1BC;
+}
+
+.text-white {
+    color: white !important;
+}
+
+/* Add custom simple styling for Django forms if needed */
+.django-form as-p p {
+    margin-bottom: 1rem;
+}
+
+.django-form input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.global-footer {
+    text-align: center;
+    padding-bottom: 2rem;
+    margin-top: auto;
+    width: 100%;
+}
+
+#add-log-form p { 
+    margin-bottom: 0; 
+    display: inline-block; 
+    margin-right: 15px; 
+}
+
+#add-log-form label { 
+    margin-right: 5px; 
+}
+
+#add-log-form input, #add-log-form select { 
+    padding: 4px; 
+    border-radius: 4px; 
+    border: 1px solid var(--border); 
+    background: var(--surface); 
+    color: var(--text); 
+}

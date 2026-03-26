@@ -1,0 +1,76 @@
+{% extends 'rango/base.html' %}
+{% block title %}Profile{% endblock %}
+{% block content %}
+<div class="card">
+    <h1>User Profile: {{ user.username }}</h1>
+    <form method="post" action="{% url 'profile' %}">
+        {% csrf_token %}
+        <input type="hidden" name="action" value="update_1rm">
+        <div class="grid-cards" style="margin-top: 2rem;">
+            <div class="card-sm" style="border: 1px solid var(--border); padding: 1.5rem; text-align: center; border-radius: 8px;">
+                <h3>Squat 1RM</h3>
+                <input type="number" name="squat_1rm" value="{{ user_profile.squat_1rm|default_if_none:'' }}" style="font-size: 2rem; font-weight: 800; color: var(--primary); text-align: center; width: 100px; background: transparent; border: 1px solid var(--border); border-radius: 4px;" placeholder="0">
+                <span style="font-size: 1.2rem; font-weight: 600;">kg</span>
+            </div>
+            <div class="card-sm" style="border: 1px solid var(--border); padding: 1.5rem; text-align: center; border-radius: 8px;">
+                <h3>Bench Press 1RM</h3>
+                <input type="number" name="bench_1rm" value="{{ user_profile.bench_1rm|default_if_none:'' }}" style="font-size: 2rem; font-weight: 800; color: var(--primary); text-align: center; width: 100px; background: transparent; border: 1px solid var(--border); border-radius: 4px;" placeholder="0">
+                <span style="font-size: 1.2rem; font-weight: 600;">kg</span>
+            </div>
+            <div class="card-sm" style="border: 1px solid var(--border); padding: 1.5rem; text-align: center; border-radius: 8px;">
+                <h3>Deadlift 1RM</h3>
+                <input type="number" name="deadlift_1rm" value="{{ user_profile.deadlift_1rm|default_if_none:'' }}" style="font-size: 2rem; font-weight: 800; color: var(--primary); text-align: center; width: 100px; background: transparent; border: 1px solid var(--border); border-radius: 4px;" placeholder="0">
+                <span style="font-size: 1.2rem; font-weight: 600;">kg</span>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 1.5rem;">
+            <button type="submit" class="btn-primary" style="padding: 0.5rem 2rem;">Save 1RM Changes</button>
+        </div>
+    </form>
+</div>
+
+<div class="card">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+        <h2 style="margin: 0;">Lift History (Last 7 Days)</h2>
+    </div>
+
+    <div style="background: rgba(255, 255, 255, 0.05); padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+        <h4 style="margin-top: 0; margin-bottom: 15px;">Add a Past Log</h4>
+        <form id="add-log-form" method="post" action="{% url 'profile' %}" style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="add_log">
+            {{ log_form.as_p }}
+            <button type="submit" class="btn-primary" style="padding: 0.5rem 1rem; margin-top: 5px;">Add Log</button>
+        </form>
+    </div>
+
+    {% if logs %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Exercise</th>
+                <th>Weight (kg)</th>
+                <th>Reps</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for log in logs %}
+            <tr id="log-row-{{ log.id }}">
+                <td>{{ log.date|date:"M d, Y H:i" }}</td>
+                <td>{{ log.exercise|title }}</td>
+                <td>{{ log.weight }}</td>
+                <td>{{ log.reps }}</td>
+                <td>
+                    <button type="button" class="btn-remove-log" data-log-id="{{ log.id }}" data-url="{% url 'ajax_delete_log' log.id %}" style="background: none; border: none; color: #ff4c4c; cursor: pointer; text-decoration: underline; font-family: 'Inter', sans-serif;">Remove</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>You haven't logged any lifts in the last 7 days.</p>
+    {% endif %}
+</div>
+{% endblock %}

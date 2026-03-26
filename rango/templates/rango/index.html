@@ -1,0 +1,33 @@
+{% extends 'rango/base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="text-center text-white" style="margin-bottom: 3rem;">
+    <h1>Select Your Lift</h1>
+    <p style="font-size: 1.1rem; opacity: 0.9;">Choose a movement below to view your personalized Smolov Jr. progression routine.</p>
+</div>
+
+<div class="grid-cards">
+    <div class="card program-card">
+        <a href="{% url 'workout' 'squat' %}">
+            <div class="program-title">Squat</div>
+            <p>Develop lower body power.</p>
+        </a>
+    </div>
+
+    <div class="card program-card">
+        <a href="{% url 'workout' 'bench-press' %}">
+            <div class="program-title">Bench Press</div>
+            <p>Build your upper body strength.</p>
+        </a>
+    </div>
+
+    <div class="card program-card">
+        <a href="{% url 'workout' 'deadlift' %}">
+            <div class="program-title">Deadlift</div>
+            <p>Master the ultimate pull.</p>
+        </a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'rango/base.html' %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+<div class="card card-sm">
+    <h1 class="text-center">Join LiftLogic</h1>
+    <p class="text-center" style="margin-bottom:2rem; color:var(--text-muted)">Enter your details and 1RMs to start.</p>
+    
+    {% if registered %}
+    <div class="alert">
+        Registration successful! You may now <a href="{% url 'login' %}">log in</a>.
+    </div>
+    {% else %}
+    <form id="user_form" method="post" action="{% url 'register' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="django-form">
+            <h3>Account Details</h3>
+            {{ user_form.as_p }}
+            
+            <h3 style="margin-top:1.5rem">Lifting Profile</h3>
+            {{ profile_form.as_p }}
+        </div>
+        <button type="submit" class="btn-submit">Register</button>
+    </form>
+    {% endif %}
+</div>
+{% endblock %}

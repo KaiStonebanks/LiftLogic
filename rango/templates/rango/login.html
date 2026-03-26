@@ -1,0 +1,23 @@
+{% extends 'rango/base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="card card-sm">
+    <h1 class="text-center">Welcome Back</h1>
+    <p class="text-center" style="margin-bottom:2rem; color:var(--text-muted)">Log in to continue your progress.</p>
+    
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        <div class="django-form">
+            {{ form.as_p }}
+        </div>
+        <button type="submit" class="btn-submit">Log In</button>
+        <input type="hidden" name="next" value="{{ next }}" />
+    </form>
+    
+    <p class="text-center" style="margin-top:1.5rem">
+        Don't have an account? <a href="{% url 'register' %}" style="color:var(--primary); font-weight:600;">Sign up</a>
+    </p>
+</div>
+{% endblock %}

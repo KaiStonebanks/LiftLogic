@@ -1,0 +1,50 @@
+{% extends 'rango/base.html' %}
+{% block title %}Smart Strength Calculator{% endblock %}
+{% block content %}
+<div class="card card-sm">
+    <h1 class="text-center">Strength Calculator</h1>
+    <p class="text-center" style="color:var(--text-muted)">Find out how strong you are compared to powerlifting standards.</p>
+    
+    <form method="post" action="{% url 'leaderboard' %}">
+        {% csrf_token %}
+        <div class="django-form">
+            {{ form.as_p }}
+        </div>
+        <button type="submit" class="btn-submit">Calculate</button>
+    </form>
+</div>
+
+{% if calc_result %}
+<div class="card">
+    <h2 class="text-center" style="color:var(--primary)">Result: {{ calc_result.label|title }}</h2>
+    <div class="grid-cards" style="margin-top:2rem;">
+        <div class="card-sm" style="border: 1px solid var(--border); padding: 1.5rem; text-align: center;">
+            <h3>Estimated 1RM</h3>
+            <p style="font-size: 2rem; font-weight: 800; color: var(--primary);">{{ calc_result.one_rm }} kg</p>
+        </div>
+        <div class="card-sm" style="border: 1px solid var(--border); padding: 1.5rem; text-align: center;">
+            <h3>Multiplier</h3>
+            <p style="font-size: 2rem; font-weight: 800; color: var(--primary);">{{ calc_result.multiplier }}x BW</p>
+        </div>
+    </div>
+    
+    <h3 style="margin-top:2rem;">Strength Targets</h3>
+    <table class="table text-center" style="max-width:600px; margin:0 auto;">
+        <thead>
+            <tr>
+                <th>Level</th>
+                <th>Target Weight</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for level, target in calc_result.targets.items %}
+            <tr {% if level == calc_result.level %}style="background:rgba(79, 70, 229, 0.1); font-weight:800;"{% endif %}>
+                <td>{{ level|title }} {% if level == calc_result.level %}(You are here){% endif %}</td>
+                <td>{{ target }} kg</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+{% endblock %}
