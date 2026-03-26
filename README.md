@@ -6,7 +6,7 @@ LiftLogic is a Django web application capable of tracking workout history, estab
 
 1. **Clone the repository**:
    ```bash
-   git clone <repo_url>
+   git clone https://github.com/KaiStonebanks/LiftLogic.git
    cd <repo_directory>
    ```
 
