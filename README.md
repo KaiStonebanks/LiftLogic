@@ -47,3 +47,8 @@ LiftLogic is a Django web application capable of tracking workout history, estab
   - Bench Press: `https://www.youtube.com/watch?v=BYKScL2sgCs`
   - Squat: `https://www.youtube.com/watch?v=UFs6E3Ti1jg`
   - Deadlift: `https://www.youtube.com/watch?v=MBbyAqvTNkU`
+
+## Deltas / Participation
+- Ali Alshehhi, Efe Dag, Jack Reilly -- 24%
+- Aiden Joseph -- 16%
+- Kai Stonebanks -- 12%
